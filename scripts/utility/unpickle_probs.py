@@ -8,6 +8,7 @@ FILE_PATH = 'probs_resnet110_c10.p'
 
 # Open file with pickled variables
 def unpickle_probs(file, verbose = 0):
+    print("file:", file) 
     with open(file, 'rb') as f:  # Python 3: open(..., 'rb')
         (y_probs_val, y_val), (y_probs_test, y_test) = pickle.load(f)  # unpickle the content
         
