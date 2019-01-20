@@ -4,6 +4,7 @@ from keras import optimizers, regularizers
 from keras.callbacks import LearningRateScheduler, TensorBoard, ModelCheckpoint
 from keras.initializers import Constant
 from keras.layers import Conv2D, Dense, Input, add, Activation, GlobalAveragePooling2D, Embedding
+from keras.layers import Dropout, SpatialDropout1D, Bidirectional, GlobalMaxPooling1D,CuDNNLSTM, Lambda
 from keras.layers.normalization import BatchNormalization
 from keras.models import Model
 from keras.optimizers import Adam
@@ -69,9 +70,9 @@ words = []
 for word in pt_model.vocab:
     words.append(word)
 
-print("Word vocabulary has " + num_words + "words." )
-
 num_words = len(word_index) + 1
+
+print("Word vocabulary has " + num_words + "words." )
 
 not_found = 0;
 embedding_matrix = np.zeros((num_words, EMBEDDING_DIM))
@@ -120,4 +121,4 @@ hist = model.fit(x_train, y_train,
           validation_split=0.1,
           shuffle=True)
 
-model.save_weights('model_weight_ep500_110SD_cifar_10.hdf5')
+model.save_weights('model_weight_sky.hdf5')
