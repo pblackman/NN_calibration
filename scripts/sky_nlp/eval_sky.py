@@ -19,12 +19,13 @@ import pickle
 # Imports to get "utility" package
 import sys
 from os import path
-sys.path.append( path.abspath("scripts") ) 
+#sys.path.append( path.abspath("scripts") ) 
+sys.path.append( path.dirname( path.dirname( path.abspath("utility") ) ) )
 from utility.evaluation import evaluate_model
 
 from gensim.models import KeyedVectors
 
-VECTORS_PATH = r"C:\Users\Patrick\Documents\mestrado\machine-learning\sky-data\wiki.pt.vec"
+VECTORS_PATH = "../../data/data_sky/wiki.pt.vec"
 
 
 (train_posts, train_tags), (test_posts, test_tags) = load_data()
