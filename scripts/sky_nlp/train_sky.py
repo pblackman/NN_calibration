@@ -84,6 +84,7 @@ embedding_matrix = np.zeros((num_words, EMBEDDING_DIM))
 
 for word,i in word_index.items():
   try:
+    print(word)
     embedding_vector = pt_model[word]
   except:
     not_found+=1
