@@ -4,7 +4,7 @@ from keras import optimizers, regularizers
 from keras.callbacks import LearningRateScheduler, TensorBoard, ModelCheckpoint
 from keras.initializers import Constant
 from keras.layers import Conv2D, Dense, Input, add, Activation, GlobalAveragePooling2D, Embedding
-from keras.layers import Dropout, SpatialDropout1D, Bidirectional, GlobalMaxPooling1D,CuDNNLSTM, Lambda
+from keras.layers import Dropout, SpatialDropout1D, Bidirectional, GlobalMaxPooling1D,CuDNNLSTM, Lambda, LSTM
 from keras.layers.normalization import BatchNormalization
 from keras.models import Model
 from keras.optimizers import Adam
@@ -106,7 +106,7 @@ sequence_input = Input(shape=(MAX_SEQUENCE_LENGTH,), dtype='int32')
 embedded_sequences = embedding_layer(sequence_input)
 
 embedded_sequences = SpatialDropout1D(0.2)(embedded_sequences)
-x = Bidirectional(CuDNNLSTM(64, return_sequences=False))(embedded_sequences)
+x = Bidirectional(LSTM(64, return_sequences=False))(embedded_sequences)
 x = Dropout(0.4)(x)
 x = BatchNormalization()(x)
 preds = Dense(len(encoder.classes_), activation='softmax')(x)
