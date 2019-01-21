@@ -21,6 +21,29 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelBinarizer, LabelEncoder
 import sys
 
+from keras import backend as K
+import tensorflow as tf
+
+NUM_PARALLEL_EXEC_UNITS = 6
+
+config = tf.ConfigProto(intra_op_parallelism_threads = NUM_PARALLEL_EXEC_UNITS, 
+         inter_op_parallelism_threads = 1, 
+         allow_soft_placement = True, 
+         device_count = {'GPU': NUM_PARALLEL_EXEC_UNITS })
+
+session = tf.Session(config=config)
+
+K.set_session(session)
+
+import os
+
+os.environ["OMP_NUM_THREADS"] = str(NUM_PARALLEL_EXEC_UNITS)
+os.environ["KMP_BLOCKTIME"] = "30"
+os.environ["KMP_SETTINGS"] = "1"
+os.environ["KMP_AFFINITY"]= "granularity=fine,verbose,compact,1,0"
+
+
+
 
 # Imports to get "utility" package
 
