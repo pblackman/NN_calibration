@@ -16,7 +16,7 @@ def load_data():
     data = data[data['class'].isin(tags)]
     labels = data['class']
 
-    train_posts, train_tags, test_posts, test_tags = train_test_split(data['utterance'], data['class'],
+   train_posts, test_posts, train_tags, test_tags = train_test_split(data['utterance'], data['class'],
                                                         stratify=data['class'], shuffle=True,
                                                         test_size=0.20)
     
