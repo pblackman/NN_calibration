@@ -59,6 +59,11 @@ y_test = encoder.transform(test_tags)
 y_train = np_utils.to_categorical(np.asarray(y_train))
 y_test = np_utils.to_categorical(np.asarray(y_test))
 
+print('x_train shape:', x_train.shape)
+print('x_test shape:', x_test.shape)
+print('y_train shape:', y_train.shape)
+print('y_test shape:', y_test.shape)
+
 # Creating the model
 
 pt_model = KeyedVectors.load_word2vec_format(VECTORS_PATH)
@@ -76,6 +81,7 @@ print("Word vocabulary has %s words." % num_words )
 
 not_found = 0;
 embedding_matrix = np.zeros((num_words, EMBEDDING_DIM))
+
 for word,i in word_index.items():
   try:
     embedding_vector = pt_model[word]
