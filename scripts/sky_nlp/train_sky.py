@@ -72,7 +72,7 @@ for word in pt_model.vocab:
 
 num_words = len(word_index) + 1
 
-print("Word vocabulary has " + num_words + "words." )
+print("Word vocabulary has %s words." % num_words )
 
 not_found = 0;
 embedding_matrix = np.zeros((num_words, EMBEDDING_DIM))
