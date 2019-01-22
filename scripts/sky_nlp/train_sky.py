@@ -21,6 +21,29 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelBinarizer, LabelEncoder
 import sys
 
+from keras import backend as K
+import tensorflow as tf
+
+NUM_PARALLEL_EXEC_UNITS = 6
+
+config = tf.ConfigProto(intra_op_parallelism_threads = NUM_PARALLEL_EXEC_UNITS, 
+         inter_op_parallelism_threads = 1, 
+         allow_soft_placement = True, 
+         device_count = {'CPU': NUM_PARALLEL_EXEC_UNITS })
+
+session = tf.Session(config=config)
+
+K.set_session(session)
+
+import os
+
+os.environ["OMP_NUM_THREADS"] = str(NUM_PARALLEL_EXEC_UNITS)
+os.environ["KMP_BLOCKTIME"] = "30"
+os.environ["KMP_SETTINGS"] = "1"
+os.environ["KMP_AFFINITY"]= "granularity=fine,verbose,compact,1,0"
+
+
+
 
 # Imports to get "utility" package
 
@@ -84,7 +107,6 @@ embedding_matrix = np.zeros((num_words, EMBEDDING_DIM))
 
 for word,i in word_index.items():
   try:
-    print(word)
     embedding_vector = pt_model[word]
   except:
     not_found+=1
@@ -124,7 +146,7 @@ print('Model compiled.')
 hist = model.fit(x_train, y_train,
           batch_size=100,
           epochs=1,
-          verbose=2,
+          verbose=3,
           validation_split=0.1,
           shuffle=True)
 

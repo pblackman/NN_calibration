@@ -115,3 +115,5 @@ scripts/resnet_sd/old/
 scripts/dan_nlp/old/
 scripts/resnet_birds_cars/old/
 scripts/temp/
+scripts/sky_nlp/*.hdf5
+scripts/sky_nlp/*.p
